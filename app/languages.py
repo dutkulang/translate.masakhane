@@ -1,10 +1,9 @@
 import json
 from pathlib import Path
 from typing import Dict, List, Optional
-
 class LanguageManager:
     def __init__(self):
-        self.file_path = Path("languages.json")
+        self.file_path = Path("app/languages.json")
         self.languages: List[dict] = json.loads(self.file_path.read_text(encoding="utf-8"))
         self.lang_dict: Dict[str, dict] = {lang["language_short"]: lang for lang in self.languages}
 
