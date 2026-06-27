@@ -25,6 +25,9 @@ uvicorn main:app --reload --port 8000
 
 
 ### Available endpoints
+
+`/languages` [GET] returns json of languages current under implementation 
+
 `/health` : [GET] Returns json with site status
 
 `/translate` : [POST] excepts JSON object
@@ -35,4 +38,10 @@ uvicorn main:app --reload --port 8000
     "source_lang": "en", # Default source language 
     "target_lang": "lg" # luganda
 }
+```
+## Run tests
+
+```sh
+# run tests
+pytest -v tests/
 ```
