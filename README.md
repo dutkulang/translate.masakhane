@@ -45,3 +45,14 @@ uvicorn main:app --reload --port 8000
 # run tests
 pytest -v tests/
 ```
+
+# How to run the frontend
+
+Open new terminal window to run the frontend app
+
+```sh
+cd frontend ; npm i ; npm run dev
+
+```
+
+This exposes the default `http://localhost:5173` URL
