@@ -1,17 +1,26 @@
-import os
 from pathlib import Path
 
 BASE_DIR = Path(__file__).parent
 MODELS_DIR = BASE_DIR / "models_cache"
 MODELS_DIR.mkdir(exist_ok=True)
 
-# Supported pairs with CTranslate2 converted models
+# Added explicit token mappings for both M2M100 and NLLB model families
+from pathlib import Path
+
+BASE_DIR = Path(__file__).parent
+MODELS_DIR = BASE_DIR / "models_cache"
+MODELS_DIR.mkdir(exist_ok=True)
+
+# masakhane models use joet that is not supported here using CTranslate2 useable models
+# for now am using the faceboook nllb model
+# the dictionary supports switching of models hence the no need for one main base model
+# I understand that masakhane community has no ready to use models
 SUPPORTED_PAIRS = {
-    "en-lg": {"model": "masakhane/m2m100_418M_en_lg", "type": "hf"},
-    "lg-en": {"model": "masakhane/m2m100_418M_lg_en", "type": "hf"},
-    "en-sw": {"model": "masakhane/m2m100_418M_en_sw", "type": "hf"},
-    "sw-en": {"model": "masakhane/m2m100_418M_sw_en", "type": "hf"},
-    "en-yo": {"model": "masakhane/m2m100_418M_en_yo", "type": "hf"},
-    "yo-en": {"model": "masakhane/m2m100_418M_yo_en", "type": "hf"},
-    # Add more as you convert models
+    "en-yo": {"model": "facebook/nllb-200-distilled-600M", "src_token": "eng_Latn", "tgt_token": "yor_Latn"},
+    "en-lg": {"model": "facebook/nllb-200-distilled-600M", "src_token": "eng_Latn", "tgt_token": "lug_Latn"},
+    "yo-en": {"model": "facebook/nllb-200-distilled-600M", "src_token": "yor_Latn", "tgt_token": "eng_Latn"},
+    "en-sw": {"model": "facebook/nllb-200-distilled-600M", "src_token": "eng_Latn", "tgt_token": "swh_Latn"},
+    "sw-en": {"model": "facebook/nllb-200-distilled-600M", "src_token": "swh_Latn", "tgt_token": "eng_Latn"},
+    "en-ig": {"model": "facebook/nllb-200-distilled-600M", "src_token": "eng_Latn", "tgt_token": "ibo_Latn"},
+    "en-ha": {"model": "facebook/nllb-200-distilled-600M", "src_token": "eng_Latn", "tgt_token": "hau_Latn"},
 }
