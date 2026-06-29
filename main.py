@@ -6,19 +6,14 @@ from fastapi.middleware.cors import CORSMiddleware
 import shutil
 import os
 import ctranslate2
-from app.config import MODELS_DIR
+from app.config import MODELS_DIR, CORS_ORIGINS
 app = FastAPI(title="Masakhane Translation API")
 
-origins = [
-    # replace with the live frontend URL
-    "http://localhost:5173",    # default local vite port
-    "http://127.0.0.1:5173",    # Alternative local  vite address
-]
 
-# 2. Add the CORS middleware to your FastAPI app
+# Add the CORS middleware to your FastAPI app
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,           # Allows frontend access
+    allow_origins=CORS_ORIGINS,           # loads COR origins from dotenv file or environment variables
     allow_credentials=True,
     allow_methods=["*"],             # Allows POST, GET, OPTIONS, etc.
     allow_headers=["*"],             # Allows headers like Content-Type
@@ -103,3 +98,6 @@ async def health_check(response: Response):
             "free_disk_space_gb": f"{round(free_gb, 2)} GB"
         }
     }
+
+from mangum import Mangum
+handler = Mangum(app)
